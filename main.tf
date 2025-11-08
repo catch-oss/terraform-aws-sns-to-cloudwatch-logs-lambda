@@ -173,6 +173,7 @@ resource "aws_lambda_permission" "sns_cloudwatchlog_multi" {
   principal     = "sns.amazonaws.com"
   source_arn    = var.create_sns_topic ? aws_sns_topic.sns_log_topic[0].arn : data.aws_sns_topic.sns_log_topic[0].arn
   qualifier     = var.lambda_publish_func ? aws_lambda_function.sns_cloudwatchlog.version : null
+  depends_on    = [ aws_lambda_function.sns_cloudwatchlog ]
 }
 
 # -------------------------------------------------------------------------------------
